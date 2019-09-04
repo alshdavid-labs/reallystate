@@ -23,6 +23,9 @@ state.subscribe(console.log)
 
 state.query(() => ({ number: 1 }))
 state.query(() => ({ number: state.value.number + 1 }))
+
+// Action name alias
+state.as('INCREMENT').query(() => ({ number: state.value.number + 1 }))
 ```
 
 ## Installation
