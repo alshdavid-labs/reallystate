@@ -11,7 +11,9 @@
 ⭐️ Familiar model to back-end
 
 <br>
+
 ## Example
+
 ```javascript
 import { State } from '@homework/state'
 
