@@ -59,6 +59,7 @@
   "dependencies": {
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "immutability-helper": "^3.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "use-subscribe": "^1.0.3"

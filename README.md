@@ -25,6 +25,39 @@ state.query(state => ({ value: state.value + 1 }))
 npm install --save @homework/state
 ```
 
+## Collections
+
+You can group concerns by key using a "collection"
+
+```typescript
+import { State } from '@homework/state'
+
+interface CountState {
+  value: number
+}
+
+const store = State.Create({ useReduxTools: true })
+const collection = new State.Collection<CountState>(store, 'Count')
+
+collection.subscribe(console.log)
+
+collection
+  .as('Initial')
+  .query(() => ({ value: 1 }))
+
+const increment = () => {
+  collection
+    .as('Increment')
+    .query(p => ({ value: p.value + 1 }))
+}
+
+const decrement = () => {
+  collection
+    .as('Decrement')
+    .query(p => ({ value: p.value - 1 }))
+}
+```
+
 ## Ethos
 
 On the back end, we often have a database which we can work with. Our business logic lives in units which consume a database connection and commit the results once they have been processed.
