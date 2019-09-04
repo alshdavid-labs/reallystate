@@ -38,7 +38,7 @@ Features compatibility with rxjs operators if you want to `.map/.filter` your wa
 
 <img width="520px" src="/sample.gif">
 
-## Action Nam Alias
+## Action Alias
 
 To apply an action name for the redux devtools, use the `as` method.
 
