@@ -21,13 +21,9 @@ const state = State.Create({ useReduxTools: true })
 
 state.subscribe(console.log)
 
-state.query(state => ({ value: 1 }))
-state.query(state => ({ value: state.value + 1 }))
+state.query(() => ({ number: 1 }))
+state.query(() => ({ number: state.value.number + 1 }))
 ```
-
-
-
-
 
 ## Installation
 
