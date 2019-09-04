@@ -1,5 +1,17 @@
+<img align="right" width="500px" src="/sample.gif">
+
 ## State for humans
 
+## Features
+
+⭐️ Simple query function execution
+
+⭐️ Redux devtools and time travel support
+
+⭐️ Familiar model to back-end
+
+<br>
+## Example
 ```javascript
 import { State } from '@homework/state'
 
@@ -11,13 +23,9 @@ state.query(state => ({ value: 1 }))
 state.query(state => ({ value: state.value + 1 }))
 ```
 
-<img align="right" width="350px" src="/sample.gif">
 
-## Features
 
-⭐️ Simple query function execution<br>
-⭐️ Redux devtools and time travel support<br>
-⭐️ Familiar model to back-end
+
 
 ## Installation
 
