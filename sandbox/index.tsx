@@ -9,10 +9,10 @@ const state = State.Create({ useReduxTools: true })
 const wiz = MathWiz(state)
 
 const App = () => {
-  const currentNumber = useSubscribe(wiz.currentNumber)
+  const count = useSubscribe(wiz)
 
   return <>
-    <h1>{currentNumber}</h1>
+    <h1>{count.current}</h1>
     <div>
       <button 
         onClick={() => wiz.increment()}>

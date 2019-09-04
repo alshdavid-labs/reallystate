@@ -1,33 +1,40 @@
 import { State } from "../src";
+import update from 'immutability-helper';
 import { map } from 'rxjs/operators'
+import { Observable } from "rxjs";
+
+interface CountState {
+  current: number
+}
 
 export const MathWiz = (state: State.Engine) => {
-  // Selector
-  const currentNumber = state.pipe(map((cur: any) => cur.value))
+  const collection = new State.Collection<CountState>(state, 'Count')
+  const subscribe = collection.subscribe.bind(collection)
+  const getValue = collection.getValue.bind(collection)
 
-  const getValue = () => state.value.value
-
-  state
-    .as('MATH_WIZ_INITIAL')
-    .query(() => ({ value: 1 }))
+  collection
+    .as('Initial')
+    .query(() => ({ current: 1 }))
 
   const increment = () => {
-    const update = getValue() + 1
-    state
-      .as('MATH_WIZ_INCREMENT')
-      .query(() => ({ value: update }))
+    collection
+      .as('Increment')
+      .query(p => ({ current: p.current + 1 }))
   }
 
   const decrement = () => {
-    const update = getValue() - 1
-    state
-      .as('MATH_WIZ_DECREMENT')
-      .query(() => ({ value: update }))
+    collection
+      .as('Decrement')
+      .query(p => ({ current: p.current - 1 }))
   }
 
   return {
-    currentNumber,
+    subscribe,
+    getValue,
     increment,
     decrement,
   }
 }
+
+//  // Wrapping immutability-helper
+// const query = (a, q) => state.as(`MATH_WIZ_${a}`).query(s => update(s, { count: q }))
