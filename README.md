@@ -1,6 +1,6 @@
 # State for humans
 
-<img align="left" width="250px" src="https://payxintl.com/wp-content/uploads/2011/09/Revolution-Fist.jpg">
+<img align="left" width="300px" src="https://payxintl.com/wp-content/uploads/2011/09/Revolution-Fist.jpg">
 
 ## Features
 
