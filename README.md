@@ -23,9 +23,6 @@ state.subscribe(console.log)
 
 state.query(() => ({ number: 1 }))
 state.query(() => ({ number: state.value.number + 1 }))
-
-// Action name alias
-state.as('INCREMENT').query(() => ({ number: state.value.number + 1 }))
 ```
 
 ## Installation
@@ -40,6 +37,16 @@ Familiar tooling experience using Redux dev tools and time travel.
 Features compatibility with rxjs operators if you want to `.map/.filter` your way to functional success.
 
 <img width="520px" src="/sample.gif">
+
+## Action Nam Alias
+
+To apply an action name for the redux devtools, use the `as` method.
+
+```javascript
+state
+  .as('INCREMENT')
+  .query(() => ({ number: state.value.number + 1 }))
+```
 
 ## Ethos
 
