@@ -33,7 +33,23 @@ store.query(() => ({ number: store.value.number + 1 }))
 npm install --save @homework/state
 ```
 
-<<<<<<< HEAD
+## Tooling
+
+Familiar tooling experience using Redux dev tools and time travel. 
+Features compatibility with rxjs operators if you want to `.map/.filter` your way to functional success.
+
+<img width="520px" src="/sample.gif">
+
+## Action Alias
+
+To apply an action name for the redux devtools, use the `as` method.
+
+```javascript
+state
+  .as('INCREMENT')
+  .query(() => ({ number: state.value.number + 1 }))
+```
+
 ## Collections
 
 You can group concerns by key using a "collection"
@@ -65,23 +81,6 @@ const decrement = () => {
     .as('Decrement')
     .query(p => ({ value: p.value - 1 }))
 }
-=======
-## Tooling
-
-Familiar tooling experience using Redux dev tools and time travel. 
-Features compatibility with rxjs operators if you want to `.map/.filter` your way to functional success.
-
-<img width="520px" src="/sample.gif">
-
-## Action Alias
-
-To apply an action name for the redux devtools, use the `as` method.
-
-```javascript
-state
-  .as('INCREMENT')
-  .query(() => ({ number: state.value.number + 1 }))
->>>>>>> 6868298820b549feede97d749b0c25b9263847a9
 ```
 
 ## Ethos
