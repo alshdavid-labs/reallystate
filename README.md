@@ -12,7 +12,7 @@
 
 ⭐️ Lightweight and extensible
 
-<br><br><br>
+<br>
 
 ## Example
 
