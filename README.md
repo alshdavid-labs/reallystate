@@ -33,7 +33,8 @@ npm install --save @homework/state
 
 ## Tooling
 
-Familiarf tooling experience using Redux dev tools and time travel. This is compatible with rxjs operators if you want to `.map/.filter` your way to functional success.
+Familiar tooling experience using Redux dev tools and time travel. 
+Features compatibility with rxjs operators if you want to `.map/.filter` your way to functional success.
 
 <img width="520px" src="/sample.gif">
 
