@@ -10,6 +10,8 @@
 
 ⭐️ Familiar model to back-end
 
+<br><br><br>
+
 ## Example
 
 ```javascript
@@ -28,6 +30,10 @@ state.query(() => ({ number: state.value.number + 1 }))
 ```bash
 npm install --save @homework/state
 ```
+
+## Debugging and Time Travel
+
+<img width="520px" src="/sample.gif">
 
 ## Ethos
 
