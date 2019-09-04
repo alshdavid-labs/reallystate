@@ -11,6 +11,8 @@ state.query(state => ({ value: 1 }))
 state.query(state => ({ value: state.value + 1 }))
 ```
 
+<img align="right" width="350px" src="/sample.gif">
+
 ## Features
 
 ⭐️ Simple query function execution<br>

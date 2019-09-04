@@ -5,8 +5,11 @@ export const Create = ({
   initialValue = {},
 } = {}): Engine => {
   let reduxTools
-  if (useReduxTools) {
-    reduxTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
+  if (
+    useReduxTools && 
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__
+  ) {
+    reduxTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__
   }
   return new Engine(
     initialValue,
