@@ -19,12 +19,12 @@
 ```javascript
 import { State } from '@homework/state'
 
-const state = State.Create({ useReduxTools: true })
+const store = State.Create({ useReduxTools: true })
 
-state.subscribe(console.log)
+store.subscribe(console.log)
 
-state.query(() => ({ number: 1 }))
-state.query(() => ({ number: state.value.number + 1 }))
+store.query(() => ({ number: 1 }))
+store.query(() => ({ number: store.value.number + 1 }))
 ```
 
 ## Installation
