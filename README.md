@@ -4,11 +4,13 @@
 
 ## Features
 
-⭐️ Simple query function execution
+⭐️ Use functions as queries
 
-⭐️ Redux devtools and time travel support
+⭐️ Full Redux tooling support
 
-⭐️ Familiar model to back-end
+⭐️ Support for rxjs operators
+
+⭐️ Lightweight and extensible
 
 <br><br><br>
 
