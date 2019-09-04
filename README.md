@@ -1,6 +1,6 @@
 <img align="right" width="500px" src="/sample.gif">
 
-## State for humans
+# State for humans
 
 ## Features
 
