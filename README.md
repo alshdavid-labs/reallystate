@@ -1,23 +1,31 @@
-## State for humans
+# State for humans
+
+<img align="left" width="250px" src="https://payxintl.com/wp-content/uploads/2011/09/Revolution-Fist.jpg">
+
+## Features
+
+⭐️ Use functions as queries
+
+⭐️ Full Redux tooling support
+
+⭐️ Support for rxjs operators
+
+⭐️ Lightweight and extensible
+
+<br>
+
+## Example
 
 ```javascript
 import { State } from '@homework/state'
 
-const state = State.Create({ useReduxTools: true })
+const store = State.Create({ useReduxTools: true })
 
-state.subscribe(console.log)
+store.subscribe(console.log)
 
-state.query(state => ({ value: 1 }))
-state.query(state => ({ value: state.value + 1 }))
+store.query(() => ({ number: 1 }))
+store.query(() => ({ number: store.value.number + 1 }))
 ```
-
-<img align="right" width="350px" src="/sample.gif">
-
-## Features
-
-⭐️ Simple query function execution<br>
-⭐️ Redux devtools and time travel support<br>
-⭐️ Familiar model to back-end
 
 ## Installation
 
@@ -25,6 +33,7 @@ state.query(state => ({ value: state.value + 1 }))
 npm install --save @homework/state
 ```
 
+<<<<<<< HEAD
 ## Collections
 
 You can group concerns by key using a "collection"
@@ -56,6 +65,23 @@ const decrement = () => {
     .as('Decrement')
     .query(p => ({ value: p.value - 1 }))
 }
+=======
+## Tooling
+
+Familiar tooling experience using Redux dev tools and time travel. 
+Features compatibility with rxjs operators if you want to `.map/.filter` your way to functional success.
+
+<img width="520px" src="/sample.gif">
+
+## Action Alias
+
+To apply an action name for the redux devtools, use the `as` method.
+
+```javascript
+state
+  .as('INCREMENT')
+  .query(() => ({ number: state.value.number + 1 }))
+>>>>>>> 6868298820b549feede97d749b0c25b9263847a9
 ```
 
 ## Ethos
