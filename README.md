@@ -31,7 +31,9 @@ state.query(() => ({ number: state.value.number + 1 }))
 npm install --save @homework/state
 ```
 
-## Debugging and Time Travel
+## Tooling
+
+Familiarf tooling experience using Redux dev tools and time travel. This is compatible with rxjs operators if you want to `.map/.filter` your way to functional success.
 
 <img width="520px" src="/sample.gif">
 
