@@ -37,7 +37,13 @@ yarn add reallystate
 
 ## Live Sandbox
 
+### Vanila
+
 https://stackblitz.com/edit/react-ts-vfxmsk?file=index.tsx
+
+### Vanila with `immutability-helper`
+
+https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx
 
 ## Tooling
 
@@ -147,7 +153,7 @@ state = immer(state, draftState => {
 ```
 
 ```javascript
-import update from 'immutability-helpe';
+import update from 'immutability-helper';
 
 let state = {}
 state = update(state, { hello: { $set: 'world' }})
