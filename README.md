@@ -1,4 +1,4 @@
-# Toy Store <i>State for humans</i>
+# Toy Store
 
 <img align="left" width="350px" src="https://www.getfilecloud.com/blog/wp-content/uploads/2014/01/building-blocks.jpg">
 
