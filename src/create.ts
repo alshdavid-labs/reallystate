@@ -7,7 +7,7 @@ export interface CreateProps {
   defaultProcessor?: QueryProcessor,
 }
 
-export const Create = <T = Record<any, any>, T2 = RunnableFn<T>>({
+export const Create = <T = any, T2 = RunnableFn<T>>({
   useReduxTools = false,
   initialValue = {},
   defaultProcessor = DefaultProcessor,

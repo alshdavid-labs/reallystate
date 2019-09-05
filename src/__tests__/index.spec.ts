@@ -1,6 +1,6 @@
 import { Store } from '../index'
 import { MockDevtools } from './mock-devtools';
-import { QueryAction, RunnableFn } from '../defaults';
+import { QueryAction } from '../defaults';
 
 it('Should run a few times', () => {
   interface State {
@@ -8,7 +8,7 @@ it('Should run a few times', () => {
   }
 
   const onUpdate = jest.fn()
-  const store = Store.Create<RunnableFn<State>>()
+  const store = Store.Create<State>()
 
   store.subscribe(state => onUpdate(state.value))
 
@@ -27,7 +27,7 @@ it('Should merge and modify values', () => {
     value: number
   }
 
-  const store = Store.Create<RunnableFn<State>>()
+  const store = Store.Create<State>()
 
   store.query(() => ({ value: 1 }))
   expect(store.value).toEqual({ value: 1 })

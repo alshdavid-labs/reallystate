@@ -1,11 +1,11 @@
 import { Store } from '../';
 import immutabilityHelper from 'immutability-helper'
 import immer from 'immer'
-import { RunnableObj, RunnableFn } from '../defaults';
+import { RunnableObj } from '../defaults';
 
 
 it('Should run with immutability-helper as processor', () => {
-  const store = Store.Create<RunnableObj>({
+  const store = Store.Create<any, RunnableObj>({
     defaultProcessor: immutabilityHelper
   })
 
@@ -49,7 +49,7 @@ it('Should run with immer as processor', () => {
     value: number
   }
 
-  const store = Store.Create<RunnableFn<State>>({
+  const store = Store.Create<State>({
     defaultProcessor: immer
   })
 

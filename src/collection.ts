@@ -11,10 +11,6 @@ export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
     return this.store.value[this.collectionName];
   }
 
-  public get subscribe() {
-    return this.onUpdate.subscribe.bind(this.onUpdate);
-  }
-
   public get pipe() {
     return this.onUpdate.pipe.bind(this.onUpdate);
   }
@@ -30,9 +26,8 @@ export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
       .pipe(map((state: any) => state[this.collectionName]))
   }
 
-  public getValue(): T {
-    return this.value
-  }
+  public subscribe = (cb: (value: T) => void) => this.onUpdate.subscribe(cb)
+  public getValue = (): T => this.value
 
   public setProcessor(processor: QueryProcessor) {
     this.defaultProcessor = processor

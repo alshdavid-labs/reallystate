@@ -16,8 +16,8 @@ export const Store = {
 export default Store
 
 export declare module Store {
-  export type Engine = OGEngine
-  export type Collection = OGCollection
+  export type Engine<T, T2> = OGEngine<T, T2>
+  export type Collection<T, T2> = OGCollection<T, T2>
   export type RunnableObj = OGRunnableObj
   export type RunnableFn<T> = OGRunnableFn<T>
 }

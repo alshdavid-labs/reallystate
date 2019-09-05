@@ -21,10 +21,6 @@ export class Engine<T, T2 = RunnableFn<any>> {
     return this.store.getValue.bind(this.store);
   }
 
-  public get subscribe() {
-    return this.store.subscribe.bind(this.store);
-  }
-
   public get pipe() {
     return this.store.pipe.bind(this.store);
   }
@@ -35,6 +31,8 @@ export class Engine<T, T2 = RunnableFn<any>> {
   ) {
     this.store = new BehaviorSubject(initialValue)
   }
+
+  public subscribe = (cb: (value: T) => void) => this.store.subscribe(cb)
 
   setProcessor(processor: QueryProcessor) {
     this.defaultProcessor = processor
