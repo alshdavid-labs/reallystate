@@ -36,14 +36,18 @@ export class Engine {
     }
   }
 
-  public as = (actionName: string) => ({
-    query: (fn: (state: any) => any) => this.query(fn, actionName)
-  })
+  public as(actionName: string = QueryAction) {
+    return {
+      query: (fn: (state: any, ...args: any) => any, ...args: any[]) => {
+        this.query(fn, ...args)
+        this.debugLog(actionName)
+      }
+    }
+  }
   
-  public query(fn: (state: any) => any, action: string = QueryAction) {
-    const update = fn(this.store.getValue())
+  public query(fn: (state: any, ...args: any) => any, ...args: any[]) {
+    const update = fn(this.store.getValue(), ...args)
     this.store.next({ ...this.store.getValue(), ...update })
-    this.debugLog(action)
   }
 
   private debugOnUpdate = ({ type, state }: any) => {

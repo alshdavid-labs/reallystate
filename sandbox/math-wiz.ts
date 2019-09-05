@@ -22,6 +22,7 @@ export const MathWiz = (state: State.Engine) => {
       .query(p => ({ current: p.current + 1 }))
   }
 
+
   const decrement = () => {
     collection
       .as('Decrement')

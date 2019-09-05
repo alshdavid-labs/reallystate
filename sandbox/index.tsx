@@ -1,29 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { useSubscribe } from 'use-subscribe'
 import { State } from '../src'
-import { MathWiz } from './math-wiz';
 
-const state = State.Create({ useReduxTools: true })
+const store = State.Create({ useReduxTools: true })
 
-const wiz = MathWiz(state)
+store.subscribe(value => console.log(value))
 
-const App = () => {
-  const count = useSubscribe(wiz)
+store.query(() => ({ number: 1 }))
+store.query(() => ({ number: store.value.number + 1 }))
 
-  return <>
-    <h1>{count.current}</h1>
-    <div>
-      <button 
-        onClick={() => wiz.increment()}>
-        Add
-      </button>
-      <button 
-        onClick={() => wiz.decrement()}>
-        Subtract
-      </button>
-    </div>
-  </>
-}
-
-ReactDOM.render(<App />, document.getElementById('app'))
+console.log(store.value)

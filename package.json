@@ -6,6 +6,7 @@
   "author": "David Alsh",
   "main": "build/index.js",
   "scripts": {
+    "dev": "parcel serve sandbox/index.html",
     "build": "npm run build:prod",
     "build:dev": "webpack",
     "build:prod": "webpack --prod",
@@ -54,14 +55,12 @@
     "typescript": "^3.5.3",
     "webpack": "^4.39.1",
     "webpack-bundle-analyzer": "^3.4.1",
-    "webpack-cli": "^3.3.6"
-  },
-  "dependencies": {
+    "webpack-cli": "^3.3.6",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
-    "immutability-helper": "^3.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "immutability-helper": "^3.0.1",
     "use-subscribe": "^1.0.3"
   }
 }
