@@ -37,11 +37,11 @@ yarn add reallystate
 
 ## Live Sandbox
 
-### Vanila
+### Vanilla
 
 https://stackblitz.com/edit/react-ts-vfxmsk?file=index.tsx
 
-### Vanila with `immutability-helper`
+### Vanilla with `immutability-helper`
 
 https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx
 
