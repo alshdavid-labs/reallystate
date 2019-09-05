@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs'
-import { QueryAction } from './defaults';
+import { DefaultProcessor, QueryProcessor, QueryAction, RunnableFn } from './defaults';
+import { Query } from './query';
 
 export interface DevTools {
   connect(): DevTools
@@ -8,12 +9,16 @@ export interface DevTools {
   init(value: any): void
 }
 
-export class Engine {
+export class Engine<T = RunnableFn<any>> {
   private tools: DevTools | undefined
   private store: BehaviorSubject<Record<string, any>>
 
   public get value() {
     return this.store.value;
+  }
+
+  public get getValue() {
+    return this.store.getValue.bind(this.store);
   }
 
   public get subscribe() {
@@ -25,24 +30,38 @@ export class Engine {
   }
 
   constructor(
-    initialValue: Record<string, any> = {},
-    devTools?: DevTools
+    private initialValue: Record<string, any> = {},
+    public defaultProcessor: QueryProcessor = DefaultProcessor
   ) {
     this.store = new BehaviorSubject(initialValue)
-    if (devTools) {
-      this.tools = devTools.connect()
-      this.tools!.subscribe((this.debugOnUpdate))
-      this.tools!.init(initialValue)
-    }
   }
 
-  public as = (actionName: string) => ({
-    query: (fn: (state: any) => any) => this.query(fn, actionName)
-  })
+  setProcessor(processor: QueryProcessor) {
+    this.defaultProcessor = processor
+  }
+
+  enableDevTools(devTools: DevTools) {
+    this.tools = devTools.connect()
+    this.tools!.subscribe((this.debugOnUpdate))
+    this.tools!.init(this.initialValue)
+  }
+
+  public as(actionName: string) {
+    return new Query()
+      .engine(this)
+      .processor(this.defaultProcessor)
+      .as(actionName)
+  }
   
-  public query(fn: (state: any) => any, action: string = QueryAction) {
-    const update = fn(this.store.getValue())
-    this.store.next({ ...this.store.getValue(), ...update })
+  public query(runnable: T) {
+    return new Query()
+      .engine(this)
+      .processor(this.defaultProcessor)
+      .query(runnable)
+  }
+
+  public commit(newState: any, action: string = QueryAction) {
+    this.store.next(newState)
     this.debugLog(action)
   }
 

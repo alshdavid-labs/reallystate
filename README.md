@@ -12,8 +12,6 @@
 
 <br><br>
  
-## State for humans
-
 ## Example
 
 ```javascript
@@ -31,10 +29,10 @@ store.query(() => ({ number: store.value.number + 1 }))
 
 ```bash
 # npm
-npm install --save toystore
+npm install --save gucci-store
 
 # Yarn
-yarn add toystore
+yarn add gucci-store
 ```
 
 ## Tooling

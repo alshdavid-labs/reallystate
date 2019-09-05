@@ -1,10 +1,11 @@
 import { Engine } from "./engine";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { QueryAction } from "./defaults";
+import { QueryAction, DefaultProcessor, QueryProcessor, RunnableFn } from "./defaults";
+import { Query } from "./query";
 
-export class Collection<T = Record<string, any>> {
-  onUpdate: Observable<T>
+export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
+  public onUpdate: Observable<T>
 
   public get value(): T {
     return this.store.value[this.collectionName];
@@ -21,29 +22,41 @@ export class Collection<T = Record<string, any>> {
   constructor(
     private store: Engine,
     private collectionName: string,
+    initialValue: T,
+    public defaultProcessor: QueryProcessor = DefaultProcessor
   ) {
+    this.commit(initialValue, 'INIT')
     this.onUpdate = this.store
       .pipe(map((state: any) => state[this.collectionName]))
   }
 
-  getValue(): T {
+  public getValue(): T {
     return this.value
   }
 
-  query = (fn: (value: T) => T) => 
-    this.store
-      .as(`[${this.collectionName}] ${QueryAction}`)
-      .query(() => ({ [this.collectionName]: fn(this.value) }))
+  public setProcessor(processor: QueryProcessor) {
+    this.defaultProcessor = processor
+  }
 
-  as = (alias: string) => {
-    const prepared = this.store
-      .as(`[${this.collectionName}] ${alias}`)
-    
-    return {
-      query: (fn: (value: T) => T) => 
-        prepared.query(
-          () => ({ [this.collectionName]: fn(this.value) })
-        )
-    }
+  public as(actionName: string) {
+    return new Query()
+      .engine(this)
+      .processor(this.defaultProcessor)
+      .as(actionName)
+  }
+  
+  public query(runnable: T2) {
+    return new Query()
+      .engine(this)
+      .processor(this.defaultProcessor)
+      .as(QueryAction)
+      .query(runnable)
+  }
+
+  public commit(newState: any, actionName: string = QueryAction) {
+    this.store.commit(
+      { [this.collectionName]: newState },
+      `[${this.collectionName}] ${actionName}`
+    )
   }
 }

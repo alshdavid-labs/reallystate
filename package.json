@@ -1,5 +1,5 @@
 {
-  "name": "gucci-store",
+  "name": "reallystate",
   "version": "1.0.1",
   "description": "State for humans",
   "license": "MIT",
@@ -49,6 +49,7 @@
     "@types/lodash-es": "^4.17.3",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "immer": "^3.2.0",
     "immutability-helper": "^3.0.1",
     "jest": "^24.8.0",
     "lodash-es": "^4.17.15",

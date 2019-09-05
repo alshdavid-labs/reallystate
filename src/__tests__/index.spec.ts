@@ -1,16 +1,20 @@
-import { State } from '../index'
+import { Store } from '../index'
 import { MockDevtools } from './mock-devtools';
-import { QueryAction } from '../defaults';
+import { QueryAction, RunnableFn } from '../defaults';
 
-it('Should run', () => {
+it('Should run a few times', () => {
+  interface State {
+    value: number
+  }
+
   const onUpdate = jest.fn()
-  const state = State.Create()
+  const store = Store.Create<RunnableFn<State>>()
 
-  state.subscribe(state => onUpdate(state.value))
+  store.subscribe(state => onUpdate(state.value))
 
-  state.query(() => ({ value: 1 }))
-  state.query(() => ({ value: 2 }))
-  state.query(() => ({ value: 3 }))
+  store.query(() => ({ value: 1 }))
+  store.query(() => ({ value: 2 }))
+  store.query(() => ({ value: 3 }))
 
   expect(onUpdate).nthCalledWith(1, undefined)
   expect(onUpdate).nthCalledWith(2, 1)
@@ -19,20 +23,24 @@ it('Should run', () => {
 })
 
 it('Should merge and modify values', () => {
-  const state = State.Create()
+  interface State {
+    value: number
+  }
 
-  state.query(() => ({ value: 1 }))
-  expect(state.value).toEqual({ value: 1 })
+  const store = Store.Create<RunnableFn<State>>()
 
-  state.query(() => ({ anotherValue: 2 }))
-  expect(state.value).toEqual({ value: 1, anotherValue: 2 })
+  store.query(() => ({ value: 1 }))
+  expect(store.value).toEqual({ value: 1 })
 
-  state.query(() => ({ anotherValue: 1 }))
-  expect(state.value).toEqual({ value: 1, anotherValue: 1 })
+  store.query(() => ({ anotherValue: 2 }))
+  expect(store.value).toEqual({ value: 1, anotherValue: 2 })
+
+  store.query(() => ({ anotherValue: 1 }))
+  expect(store.value).toEqual({ value: 1, anotherValue: 1 })
 })
 
 it('Should shallow merge values', () => {
-  const state = State.Create()
+  const state = Store.Create()
 
   state.query(() => ({ one: { two: { value: 1 }} }))
   expect(state.value).toEqual({ one: { two: { value: 1 }} })
@@ -48,7 +56,8 @@ it('Should notify devtools on updates', () => {
   const sendSpy = jest.fn()
 
   const mockDevtools = new MockDevtools({ sendSpy })
-  const state = new State.Engine({}, mockDevtools)
+  const state = new Store.Engine({})
+  state.enableDevTools(mockDevtools)
 
   state.query(() => ({ value: 1 }))
   expect(sendSpy).toBeCalledWith(QueryAction, { value: 1 })
