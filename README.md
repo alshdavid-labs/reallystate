@@ -30,7 +30,11 @@ store.query(() => ({ number: store.value.number + 1 }))
 ## Installation
 
 ```bash
+# npm
 npm install --save toystore
+
+# Yarn
+yarn add toystore
 ```
 
 ## Tooling
