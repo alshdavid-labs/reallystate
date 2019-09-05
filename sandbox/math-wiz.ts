@@ -22,7 +22,6 @@ export const MathWiz = (state: State.Engine) => {
       .query(p => ({ current: p.current + 1 }))
   }
 
-
   const decrement = () => {
     collection
       .as('Decrement')
@@ -36,6 +35,3 @@ export const MathWiz = (state: State.Engine) => {
     decrement,
   }
 }
-
-//  // Wrapping immutability-helper
-// const query = (a, q) => state.as(`MATH_WIZ_${a}`).query(s => update(s, { count: q }))
