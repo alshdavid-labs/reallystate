@@ -15,7 +15,7 @@
 ## Example
 
 ```javascript
-import { Store } from 'gucci-store' // 4kb
+import { Store } from 'reallystate' // 4kb
 
 const store = Store.Create({ useReduxTools: true })
 
@@ -29,10 +29,10 @@ store.query(() => ({ number: store.value.number + 1 }))
 
 ```bash
 # npm
-npm install --save gucci-store
+npm install --save reallystate
 
 # Yarn
-yarn add gucci-store
+yarn add reallystate
 ```
 
 ## Tooling
@@ -40,7 +40,7 @@ yarn add gucci-store
 Familiar tooling experience using Redux dev tools and time travel. 
 Features compatibility with rxjs operators if you want to `.map/.filter` your way to functional success.
 
-<img width="520px" src="/sample.gif">
+<img width="520px" src="https://cdn.davidalsh.com/github/reallystate.sample.gif">
 
 ## Action Alias
 
@@ -57,14 +57,17 @@ store
 You can group concerns by key using a "collection"
 
 ```typescript
-import { Store } from 'gucci-store'
+import { Store } from 'reallystate'
 
 interface CountState {
   value: number
 }
 
 const store = Store.Create({ useReduxTools: true })
-const collection = new Store.Collection<CountState>(store, 'Count')
+const collection = new Store.CreateCollection({
+  store,
+  collectionName: 'myCollection'
+})
 
 collection.subscribe(console.log)
 
@@ -85,108 +88,63 @@ const decrement = () => {
 }
 ```
 
-## Ethos
-
-On the back end, we often have a database which we can work with. Our business logic lives in units which consume a database connection and commit the results once they have been processed.
-
-This aims to bring that paradigm to the front end
-
-### Example
-
-On the server we would prepare a DB statement
-```javascript
-const addPersonQuery = (db, person) => 
-  db.prepare(
-    'INSERT INTO people VALUES ?', person
-  )
-```
-Then commit it to the DB
-```javascript
-const addJenny = addPersonQuery(db, 'Jenny')
-await addJenny.commit()
-```
-
-#### This project allows for similar syntax
-
-We are working with simple JavaScript objects here, so
-there is no query syntax you would get with SQL or Mongo.
-
-There for, a query is simply a function that takes state
-and modfies it.
-
-Below we prepare a query
-```javascript
-export const addPersonQuery = person => state => {
-  return {
-    people: [ ...state.people, person ]
-  }
-}
-```
-
-We then pass the query into the state engine for execution
-
-```javascript
-import { Store } from 'gucci-store'
-import { addPersonQuery } from './query'
-
-const store = Store.Create({ useReduxTools: true })
-
-store.query(addPersonQuery('Penny'))
-```
-
-### Additional Query Syntax
+### Additional Query Processors
 
 If you don't want to use simple javascript to traverse an object tree for modifying your state, you can use third party packages to introduce the desired query syntax.
 
-As an example, the package `immutability-helper` is quite nice.
+#### Using `immutability-helper`
 
 ```javascript
-import { Store } from 'gucci-store'
-import update from 'immutability-helper';
+import { Store } from 'reallystate'
+import immutabilityHelper from 'immutability-helper';
 
-const store = Store.Create()
+const store = Store.Create({
+  defaultProcessor: immutabilityHelper
+})
 
-state.query(state => update(state, { myList: $push: ['item'] }))
+state.query({ myList: $push: ['item'] }))
 ```
 
+#### Using `immer`
 Or you can use Immer, or whatever
 
 ```javascript
-const increment = () => {   
-    const next = store.value.current + 1
-    
-    // Plain JS
-    store.query(() => ({ current: next }))
-    
-    // immutability-helper
-    store.query(state => update(state, { current: { $set: next }}))
+import { Store } from 'reallystate'
+import immer from 'immer';
 
-    // immer
-    store.query(state => produce(state, draftState => {
-      draftState.current = next
-    }))
+const store = Store.Create({
+  defaultProcessor: immer
+})
+
+state.query(draftState => {
+  draftState.items.push('Hello')
+}))
+```
+
+### Custom query processors
+
+As long as your processor matches the following signature, it can be used as a query processor.
+
+```javascript
+function runnable(state, effect) {
+  return state
 }
 ```
 
-### Wrapping libraries
-
-You can wrap third-party libraries that match the following signature
+As an example both `immer` and `immutability-helpe` use this signature.
 
 ```javascript
-import { Store } from 'gucci-store'
+import immer from 'immer';
 
-const wrappable = fn(state, arg)
-const exec = Store.Wrap(wrappable)
+let state = {}
+state = immer(state, draftState => {
+  draftState.hello = 'world'
+})
 ```
 
 ```javascript
-import { Store } from 'gucci-store'
-import produce from 'immer'
+import update from 'immutability-helpe';
 
-const exec = Store.Wrap(produce)
-const store = Store.Create({ initialValue: { count: 0 } })
-
-store.query(exec(draftState => {
-  draftState.count = draftState.count + 1
-}))
+let state = {}
+state = update(state, { hello: { $set: 'world' }})
 ```
