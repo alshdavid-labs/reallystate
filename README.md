@@ -144,3 +144,22 @@ const state = State.Create()
 
 state.query(state => update(state, { myList: $push: ['item'] }))
 ```
+
+Or you can use Immer, or whatever
+
+```javascript
+const increment = () => {   
+    const next = store.value.current + 1
+    
+    // Plain JS
+    store.query(() => ({ current: next }))
+    
+    // immutability-helper
+    store.query(state => update(state, { current: { $set: next }}))
+
+    // immer
+    store.query(state => produce(state, draftState => {
+      draftState.current = next
+    }))
+}
+```
