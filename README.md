@@ -12,14 +12,14 @@
 
 <br><br>
  
- ## State for humans
+## State for humans
 
 ## Example
 
 ```javascript
-import { Toystore } from 'toystore' // 4kb
+import { Store } from 'gucci-store' // 4kb
 
-const store = Toystore.Create({ useReduxTools: true })
+const store = Store.Create({ useReduxTools: true })
 
 store.subscribe(console.log)
 
@@ -59,14 +59,14 @@ store
 You can group concerns by key using a "collection"
 
 ```typescript
-import { Toystore } from 'toystore'
+import { Store } from 'gucci-store'
 
 interface CountState {
   value: number
 }
 
-const store = Toystore.Create({ useReduxTools: true })
-const collection = new Toystore.Collection<CountState>(store, 'Count')
+const store = Store.Create({ useReduxTools: true })
+const collection = new Store.Collection<CountState>(store, 'Count')
 
 collection.subscribe(console.log)
 
@@ -128,10 +128,10 @@ export const addPersonQuery = person => state => {
 We then pass the query into the state engine for execution
 
 ```javascript
-import { Toystore } from 'toystore'
+import { Store } from 'gucci-store'
 import { addPersonQuery } from './query'
 
-const store = Toystore.Create({ useReduxTools: true })
+const store = Store.Create({ useReduxTools: true })
 
 store.query(addPersonQuery('Penny'))
 ```
@@ -143,10 +143,10 @@ If you don't want to use simple javascript to traverse an object tree for modify
 As an example, the package `immutability-helper` is quite nice.
 
 ```javascript
-import { Toystore } from 'toystore'
+import { Store } from 'gucci-store'
 import update from 'immutability-helper';
 
-const store = Toystore.Create()
+const store = Store.Create()
 
 state.query(state => update(state, { myList: $push: ['item'] }))
 ```
@@ -175,18 +175,18 @@ const increment = () => {
 You can wrap third-party libraries that match the following signature
 
 ```javascript
-import { Toystore } from 'toystore'
+import { Store } from 'gucci-store'
 
 const wrappable = fn(state, arg)
-const exec = Toystore.Wrap(wrappable)
+const exec = Store.Wrap(wrappable)
 ```
 
 ```javascript
-import { Toystore } from 'toystore'
+import { Store } from 'gucci-store'
 import produce from 'immer'
 
-const exec = Toystore.Wrap(produce)
-const store = Toystore.Create({ initialValue: { count: 0 } })
+const exec = Store.Wrap(produce)
+const store = Store.Create({ initialValue: { count: 0 } })
 
 store.query(exec(draftState => {
   draftState.count = draftState.count + 1
