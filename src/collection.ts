@@ -1,6 +1,7 @@
 import { Engine } from "./engine";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { QueryAction } from "./defaults";
 
 export class Collection<T = Record<string, any>> {
   onUpdate: Observable<T>
@@ -30,7 +31,9 @@ export class Collection<T = Record<string, any>> {
   }
 
   query = (fn: (value: T) => T) => 
-    this.store.query(() => ({ [this.collectionName]: fn(this.value) }))
+    this.store
+      .as(`[${this.collectionName}] ${QueryAction}`)
+      .query(() => ({ [this.collectionName]: fn(this.value) }))
 
   as = (alias: string) => {
     const prepared = this.store

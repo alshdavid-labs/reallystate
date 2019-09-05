@@ -35,6 +35,3 @@ export const MathWiz = (state: State.Engine) => {
     decrement,
   }
 }
-
-//  // Wrapping immutability-helper
-// const query = (a, q) => state.as(`MATH_WIZ_${a}`).query(s => update(s, { count: q }))
