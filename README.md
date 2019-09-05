@@ -107,25 +107,26 @@ import { Store } from 'reallystate'
 import immutabilityHelper from 'immutability-helper';
 
 const store = Store.Create({
-  defaultProcessor: immutabilityHelper
+  defaultProcessor: immutabilityHelper,
+  initialState: { myList: [] },
 })
 
 state.query({ myList: $push: ['item'] }))
 ```
 
 #### Using `immer`
-Or you can use Immer, or whatever
 
 ```javascript
 import { Store } from 'reallystate'
 import immer from 'immer';
 
 const store = Store.Create({
-  defaultProcessor: immer
+  defaultProcessor: immer,
+  initialState: { myList: [] },
 })
 
 state.query(draftState => {
-  draftState.items.push('Hello')
+  draftState.myList.push('Hello')
 }))
 ```
 
