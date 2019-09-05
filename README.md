@@ -35,13 +35,13 @@ npm install --save reallystate
 yarn add reallystate
 ```
 
-## Live Sandbox
+## Demo Sandboxes
 
-### Vanilla
+#### Vanilla
 
 https://stackblitz.com/edit/react-ts-vfxmsk?file=index.tsx
 
-### Vanilla with `immutability-helper`
+#### Vanilla with immutability-helper
 
 https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx
 
