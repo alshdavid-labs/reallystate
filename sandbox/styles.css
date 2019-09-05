@@ -23,11 +23,11 @@ button:first-child {
 button:last-child {
   background: #f25b41;
 }
-
+/* 
 div {
   display: flex;
   justify-content: space-between;
-}
+} */
 
 main {
   text-align: center;

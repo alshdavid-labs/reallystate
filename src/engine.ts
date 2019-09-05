@@ -9,9 +9,9 @@ export interface DevTools {
   init(value: any): void
 }
 
-export class Engine<T = RunnableFn<any>> {
+export class Engine<T, T2 = RunnableFn<any>> {
   private tools: DevTools | undefined
-  private store: BehaviorSubject<Record<string, any>>
+  private store: BehaviorSubject<T>
 
   public get value() {
     return this.store.value;
@@ -30,7 +30,7 @@ export class Engine<T = RunnableFn<any>> {
   }
 
   constructor(
-    private initialValue: Record<string, any> = {},
+    private initialValue: T,
     public defaultProcessor: QueryProcessor = DefaultProcessor
   ) {
     this.store = new BehaviorSubject(initialValue)
@@ -47,14 +47,14 @@ export class Engine<T = RunnableFn<any>> {
   }
 
   public as(actionName: string) {
-    return new Query()
+    return new Query<T2>()
       .engine(this)
       .processor(this.defaultProcessor)
       .as(actionName)
   }
   
-  public query(runnable: T) {
-    return new Query()
+  public query(runnable: T2) {
+    return new Query<T2>()
       .engine(this)
       .processor(this.defaultProcessor)
       .query(runnable)

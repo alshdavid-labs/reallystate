@@ -5,7 +5,7 @@ interface Storer {
   getValue(): any
 }
 
-export class Query {
+export class Query<T> {
   private actionName: string = QueryAction
   private queryProcessor: QueryProcessor = DefaultProcessor
   private storer: Storer | undefined
@@ -25,7 +25,7 @@ export class Query {
     return this
   }
 
-  query(runnable: any) {
+  query(runnable: T) {
     if (this.storer === undefined) {
       return
     }

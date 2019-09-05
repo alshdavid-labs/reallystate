@@ -3,7 +3,7 @@ import { QueryProcessor, RunnableFn } from "./defaults";
 import { Collection } from "./collection";
 
 export interface CreateCollectionProps {
-  store: Engine,
+  store: Engine<any>,
   collectionName: string,
   initialValue?: any,
   defaultProcessor?: QueryProcessor,

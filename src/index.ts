@@ -13,6 +13,8 @@ export const Store = {
   Collection: OGCollection
 }
 
+export default Store
+
 export declare module Store {
   export type Engine = OGEngine
   export type Collection = OGCollection

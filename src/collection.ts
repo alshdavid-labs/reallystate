@@ -20,7 +20,7 @@ export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
   }
 
   constructor(
-    private store: Engine,
+    private store: Engine<any>,
     private collectionName: string,
     initialValue: T,
     public defaultProcessor: QueryProcessor = DefaultProcessor
@@ -39,14 +39,14 @@ export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
   }
 
   public as(actionName: string) {
-    return new Query()
+    return new Query<T2>()
       .engine(this)
       .processor(this.defaultProcessor)
       .as(actionName)
   }
   
   public query(runnable: T2) {
-    return new Query()
+    return new Query<T2>()
       .engine(this)
       .processor(this.defaultProcessor)
       .as(QueryAction)

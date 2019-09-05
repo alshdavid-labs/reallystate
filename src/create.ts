@@ -1,5 +1,5 @@
 import { Engine } from "./engine";
-import { DefaultProcessor, QueryProcessor } from "./defaults";
+import { DefaultProcessor, QueryProcessor, RunnableFn } from "./defaults";
 
 export interface CreateProps {
   useReduxTools?: boolean,
@@ -7,12 +7,12 @@ export interface CreateProps {
   defaultProcessor?: QueryProcessor,
 }
 
-export const Create = <T>({
+export const Create = <T = Record<any, any>, T2 = RunnableFn<T>>({
   useReduxTools = false,
   initialValue = {},
   defaultProcessor = DefaultProcessor,
-}: CreateProps = {}): Engine<T> => {
-  const engine = new Engine<T>(initialValue)
+}: CreateProps = {}): Engine<T, T2> => {
+  const engine = new Engine<T, T2>(initialValue)
   engine.setProcessor(defaultProcessor)
   if (
     useReduxTools && 
