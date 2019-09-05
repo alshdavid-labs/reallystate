@@ -43,7 +43,7 @@ Vanilla
 https://stackblitz.com/edit/react-ts-vfxmsk?file=index.tsx
 ```
 
-[https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx](Vanilla with immutability-helper)
+(Vanilla with immutability-helper)[https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx]
 
 
 ## Tooling
