@@ -1,10 +1,10 @@
 import { Engine } from "./engine";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { QueryAction, DefaultProcessor, QueryProcessor, RunnableFn } from "./defaults";
+import { QueryAction, DefaultProcessor, QueryProcessor } from "./defaults";
 import { Query } from "./query";
 
-export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
+export class Collection<T, T2> {
   public onUpdate: Observable<T>
 
   public get value(): T {
@@ -16,7 +16,7 @@ export class Collection<T = Record<string, any>, T2 = RunnableFn<T>> {
   }
 
   constructor(
-    private store: Engine<any>,
+    private store: Engine<any, any>,
     private collectionName: string,
     initialValue: T,
     public defaultProcessor: QueryProcessor = DefaultProcessor

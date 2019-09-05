@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs'
-import { DefaultProcessor, QueryProcessor, QueryAction, RunnableFn } from './defaults';
+import { DefaultProcessor, QueryProcessor, QueryAction } from './defaults';
 import { Query } from './query';
 
 export interface DevTools {
@@ -9,7 +9,7 @@ export interface DevTools {
   init(value: any): void
 }
 
-export class Engine<T, T2 = RunnableFn<any>> {
+export class Engine<T, T2> {
   private tools: DevTools | undefined
   private store: BehaviorSubject<T>
 
