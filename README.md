@@ -13,6 +13,8 @@
 ⭐️ Lightweight and extensible
 
 <br><br>
+ 
+ ## State for humans
 
 ## Example
 
