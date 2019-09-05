@@ -17,7 +17,7 @@
 ## Example
 
 ```javascript
-import { Toystore } from 'toystore'
+import { Toystore } from 'toystore' // 4kb
 
 const store = Toystore.Create({ useReduxTools: true })
 

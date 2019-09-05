@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "David Alsh",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "npm run build:prod",
     "build:dev": "webpack",
@@ -12,10 +13,11 @@
     "build:stats": "webpack --prod --stats",
     "build:watch": "webpack --watch",
     "clean": "rm -r -f build node_modules",
+    "dev": "cd sandbox && parcel serve index.html",
     "start": "npm run build:watch",
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
+    "test:watch": "jest --watch",
     "watch": "webpack --watch"
   },
   "jest": {
@@ -45,23 +47,21 @@
   "devDependencies": {
     "@types/jest": "^24.0.17",
     "@types/lodash-es": "^4.17.3",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "immutability-helper": "^3.0.1",
     "jest": "^24.8.0",
     "lodash-es": "^4.17.15",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "rxjs": "^6.5.3",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
+    "use-subscribe": "^1.0.3",
     "webpack": "^4.39.1",
     "webpack-bundle-analyzer": "^3.4.1",
     "webpack-cli": "^3.3.6"
-  },
-  "dependencies": {
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.9.0",
-    "immutability-helper": "^3.0.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "use-subscribe": "^1.0.3"
   }
 }
