@@ -64,7 +64,7 @@ interface CountState {
 }
 
 const store = Store.Create({ useReduxTools: true })
-const collection = new Store.CreateCollection({
+const collection = Store.CreateCollection({
   store,
   collectionName: 'myCollection'
 })
