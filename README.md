@@ -1,6 +1,8 @@
-# State for humans
+# Toy Store
 
-<img align="left" width="300px" src="https://payxintl.com/wp-content/uploads/2011/09/Revolution-Fist.jpg">
+## State for humans
+
+<img align="left" width="300px" src="https://www.getfilecloud.com/blog/wp-content/uploads/2014/01/building-blocks.jpg">
 
 ## Features
 
