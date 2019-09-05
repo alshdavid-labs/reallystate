@@ -19,9 +19,9 @@
 ## Example
 
 ```javascript
-import { State } from '@homework/state'
+import { Toystore } from 'toystore'
 
-const store = State.Create({ useReduxTools: true })
+const store = Toystore.Create({ useReduxTools: true })
 
 store.subscribe(console.log)
 
@@ -32,7 +32,7 @@ store.query(() => ({ number: store.value.number + 1 }))
 ## Installation
 
 ```bash
-npm install --save @homework/state
+npm install --save toystore
 ```
 
 ## Tooling
@@ -47,7 +47,7 @@ Features compatibility with rxjs operators if you want to `.map/.filter` your wa
 To apply an action name for the redux devtools, use the `as` method.
 
 ```javascript
-state
+store
   .as('INCREMENT')
   .query(() => ({ number: state.value.number + 1 }))
 ```
@@ -57,14 +57,14 @@ state
 You can group concerns by key using a "collection"
 
 ```typescript
-import { State } from '@homework/state'
+import { Toystore } from 'toystore'
 
 interface CountState {
   value: number
 }
 
-const store = State.Create({ useReduxTools: true })
-const collection = new State.Collection<CountState>(store, 'Count')
+const store = Toystore.Create({ useReduxTools: true })
+const collection = new Toystore.Collection<CountState>(store, 'Count')
 
 collection.subscribe(console.log)
 
@@ -126,12 +126,12 @@ export const addPersonQuery = person => state => {
 We then pass the query into the state engine for execution
 
 ```javascript
-import { State } from '@homework/state'
+import { Toystore } from 'toystore'
 import { addPersonQuery } from './query'
 
-const state = State.Create({ useReduxTools: true })
+const store = Toystore.Create({ useReduxTools: true })
 
-state.query(addPersonQuery('Penny'))
+store.query(addPersonQuery('Penny'))
 ```
 
 ### Additional Query Syntax
@@ -141,8 +141,10 @@ If you don't want to use simple javascript to traverse an object tree for modify
 As an example, the package `immutability-helper` is quite nice.
 
 ```javascript
+import { Toystore } from 'toystore'
 import update from 'immutability-helper';
-const state = State.Create()
+
+const store = Toystore.Create()
 
 state.query(state => update(state, { myList: $push: ['item'] }))
 ```
@@ -164,4 +166,27 @@ const increment = () => {
       draftState.current = next
     }))
 }
+```
+
+### Wrapping libraries
+
+You can wrap third-party libraries that match the following signature
+
+```javascript
+import { Toystore } from 'toystore'
+
+const wrappable = fn(state, arg)
+const exec = Toystore.Wrap(wrappable)
+```
+
+```javascript
+import { Toystore } from 'toystore'
+import produce from 'immer'
+
+const exec = Toystore.Wrap(produce)
+const store = Toystore.Create({ initialValue: { count: 0 } })
+
+store.query(exec(draftState => {
+  draftState.count = draftState.count + 1
+}))
 ```
