@@ -39,8 +39,9 @@ yarn add reallystate
 
 [Vanilla](https://stackblitz.com/edit/react-ts-vfxmsk?file=index.tsx)
 
-[Vanilla with immutability-helper](https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx)
+[With immutability-helper](https://stackblitz.com/edit/react-ts-3hlqhf?file=index.tsx)
 
+[Abstracting](https://stackblitz.com/edit/react-ts-zqugch?file=index.tsx)
 
 ## Tooling
 
