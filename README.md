@@ -10,8 +10,6 @@
 
 ⭐️ Lightweight and extensible
 
-<br><br>
- 
 ## Example
 
 ```javascript
